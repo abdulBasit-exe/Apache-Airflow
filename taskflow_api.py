@@ -15,7 +15,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-@dag(dag_id='dag_with_taskflow',
+@dag(dag_id='dag_with_taskflow_v02',
      default_args = default_args,
      start_date= datetime(2024,3,7),
      description = "this dag is created through taskflow Api",
@@ -23,21 +23,25 @@ default_args = {
 
 def greeting_hello_world():
 
-    @task
+    @task(multiple_outputs=True)
     def getName():
-        return "abdul basit"
+        return {
+            'firstName': "Abdul Basit",
+            'lastName': "Memon"
+        }
 
     @task
     def getAge():
-        return 22
+        return 25
 
     @task
-    def greet(name, age):
-        print(f"Hello World, this is {name} "
+    def greet(firstName, lastName, age):
+        print(f"Hello World, this is {firstName} {lastName} "
               f"and i am {age} years old.")
     
-    name = getName()
+    name_dict= getName()
     age = getAge()
-    greet(name = name, age = age)
+    greet(firstName=name_dict['firstName'],
+          lastName=name_dict['lastName'], age=age)
 
 greet_dag = greeting_hello_world()
