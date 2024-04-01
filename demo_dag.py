@@ -1,6 +1,3 @@
-# from airflow import DAG
-# from airflow.operators.python import PythonOperator
-# from datetime import datetime, timedelta
 from faker import Faker 
 import csv
 
@@ -35,7 +32,7 @@ def CSVToJson():
 
 
 default_args = {
-    'owner' : 'airflow',
+    'owner' : 'a-basit',
     'depends_on_past': False,
     'start_date': dt.datetime(2024, 2, 24, 3),
     'email_on_failure': False,
