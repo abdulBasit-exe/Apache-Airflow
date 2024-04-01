@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 default_args = {
     'owner' : 'abdul-basit',
     'depends_on_past': False,
-    'start_date': datetime(2024, 3, 7),
+    'start_date': datetime(2024, 3, 13),
     'email_on_failure': False,
     'email_on_retry': False,
     'retries':3,
@@ -19,7 +19,9 @@ default_args = {
      default_args = default_args,
      start_date= datetime(2024,3,7),
      description = "this dag is created through taskflow Api",
-     schedule_interval = timedelta(hours=1))
+     schedule_interval = timedelta(days=1),
+     catchup = True
+)
 
 def greeting_hello_world():
 
